@@ -14,7 +14,16 @@ type User {
   last_name: String
   email: String
 }
-
+input SigninUserInput {
+  email: String!
+  password: String!
+  first_name: String!
+  last_name: String!
+}
+type SigninResponse {
+  user: User!
+}
 type Mutation {
   login(loginUserInput: LoginUserInput!): LoginResponse!
+  signin(signinUserInput: SigninUserInput!): SigninResponse!
 }

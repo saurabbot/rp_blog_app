@@ -14,13 +14,25 @@ export class UsersService {
       ...createUserInput,
       password: hashedPassword,
     };
-    return this.prisma.user.create({
+    return await this.prisma.user.create({
       data: encryptedUserInput,
     });
   }
 
+  async compareUserPassword(plainTextPassword: string, hashedPassword: string) {
+    const isSame = await bcrypt.compare(plainTextPassword, hashedPassword);
+    return isSame;
+  }
+
   findAll() {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({
+      select: {
+        id: true,
+        email: true,
+        first_name: true,
+        last_name: true,
+      },
+    });
   }
 
   findOne(id: number) {

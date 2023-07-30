@@ -94,5 +94,9 @@ export abstract class IQuery {
     abstract user(id: number): Nullable<User> | Promise<Nullable<User>>;
 }
 
+export abstract class ISubscription {
+    abstract blogCreated(): Blog | Promise<Blog>;
+}
+
 export type DateTime = any;
 type Nullable<T> = T | null;

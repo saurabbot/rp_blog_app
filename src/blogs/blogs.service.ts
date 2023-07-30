@@ -10,6 +10,13 @@ export class BlogsService {
   async create(createBlogInput: Prisma.BlogCreateInput) {
     return await this.prisma.blog.create({
       data: createBlogInput,
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        user_id: true,
+        User: true,
+      },
     });
   }
 

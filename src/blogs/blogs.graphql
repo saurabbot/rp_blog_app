@@ -29,3 +29,7 @@ type Mutation {
   updateBlog(updateBlogInput: UpdateBlogInput!): Blog!
   removeBlog(id: Int!): Blog
 }
+
+type Subscription {
+  blogCreated: Blog! # Subscription for new blog posts
+}

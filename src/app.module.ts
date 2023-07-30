@@ -7,7 +7,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { BlogsModule } from './blogs/blogs.module';
 import { GraphQLDateTime } from 'graphql-iso-date';
-
+import { WebsocketsGateway } from './gateway/gateway.module';
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -15,12 +15,18 @@ import { GraphQLDateTime } from 'graphql-iso-date';
       playground: true,
       typePaths: ['./**/*.graphql'],
       resolvers: { DateTime: GraphQLDateTime },
+      installSubscriptionHandlers: true,
+      subscriptions: {
+        'subscriptions-transport-ws': {
+          path: '/graphql',
+        },
+      },
     }),
     UsersModule,
     AuthModule,
     BlogsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, WebsocketsGateway],
 })
 export class AppModule {}

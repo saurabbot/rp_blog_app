@@ -11,9 +11,20 @@ datasource db {
 }
 
 model User {
-  id           Int @id @default(autoincrement()) @unique
-  first_name   String 
-  last_name    String
-  email        String
-  password     String
+  id         Int    @id @unique @default(autoincrement())
+  first_name String
+  last_name  String
+  email      String
+  password   String
+  Blog       Blog[]
+}
+
+model Blog {
+  id         Int      @id @unique @default(autoincrement())
+  title      String
+  content    String?
+  created_at DateTime @default(now())
+  user_id    Int 
+
+  User User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }

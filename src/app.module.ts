@@ -5,6 +5,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { BlogsModule } from './blogs/blogs.module';
+import { GraphQLDateTime } from 'graphql-iso-date';
 
 @Module({
   imports: [
@@ -12,9 +14,11 @@ import { AuthModule } from './auth/auth.module';
       driver: ApolloDriver,
       playground: true,
       typePaths: ['./**/*.graphql'],
+      resolvers: { DateTime: GraphQLDateTime },
     }),
     UsersModule,
     AuthModule,
+    BlogsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

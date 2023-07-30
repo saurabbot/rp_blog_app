@@ -1,0 +1,31 @@
+scalar DateTime
+type Blog {
+  # Example field (placeholder)
+  id: Int!
+  created_at: DateTime!
+  title: String!
+  content: String
+  user_id: Int!
+}
+
+input CreateBlogInput {
+  # Example field (placeholder)
+  title: String!
+  user_id: Int!
+  content: String!
+}
+
+input UpdateBlogInput {
+  id: Int!
+}
+
+type Query {
+  blogs: [Blog]!
+  blog(id: Int!): Blog
+}
+
+type Mutation {
+  createBlog(createBlogInput: CreateBlogInput!): Blog!
+  updateBlog(updateBlogInput: UpdateBlogInput!): Blog!
+  removeBlog(id: Int!): Blog
+}

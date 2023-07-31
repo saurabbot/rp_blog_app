@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { BlogsModule } from './blogs/blogs.module';
 import { GraphQLDateTime } from 'graphql-iso-date';
 import { WebsocketsGateway } from './gateway/gateway.module';
+import { AlertModule } from './alert/alert.module';
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -25,6 +26,7 @@ import { WebsocketsGateway } from './gateway/gateway.module';
     UsersModule,
     AuthModule,
     BlogsModule,
+    AlertModule,
   ],
   controllers: [AppController],
   providers: [AppService, WebsocketsGateway],

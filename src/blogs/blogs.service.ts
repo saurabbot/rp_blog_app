@@ -8,7 +8,7 @@ import { PrismaService } from 'prisma/prisma.service';
 export class BlogsService {
   constructor(private prisma: PrismaService) {}
   async create(createBlogInput: Prisma.BlogCreateInput) {
-    return await this.prisma.blog.create({
+    const newBlog = await this.prisma.blog.create({
       data: createBlogInput,
       select: {
         id: true,
@@ -18,6 +18,14 @@ export class BlogsService {
         User: true,
       },
     });
+    await this.prisma.alert.create({
+      data: {
+        message: `${newBlog.User.first_name} posted a blog`,
+        sender_id: newBlog.user_id,
+        blog_id: newBlog.id,
+      },
+    });
+    return newBlog;
   }
 
   async findAll() {

@@ -1,0 +1,25 @@
+scalar DateTime
+
+type Alert {
+  id: Int!
+  created_at: DateTime!
+  message: String!
+  sender_id: Int!
+  blog_id: Int!
+  isViewed: Boolean!
+}
+
+input CreateAlertInput {
+  message: String!
+  sender_id: Int!
+  blog_id: Int!
+  isViewed: Boolean!
+}
+type Query {
+  alerts: [Alert]!
+  alert(id: Int!): Alert
+}
+
+type Mutation {
+  createAlert(createAlertInput: CreateAlertInput!): Alert!
+}

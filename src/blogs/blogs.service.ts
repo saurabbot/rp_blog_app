@@ -42,6 +42,8 @@ export class BlogsService {
         id: true,
         title: true,
         content: true,
+        User: true,
+        created_at: true
       },
     });
   }

@@ -121,6 +121,7 @@ export class Blog {
     title: string;
     content?: Nullable<string>;
     user_id: number;
+    User?: Nullable<User>;
 }
 
 export abstract class ISubscription {

@@ -11,13 +11,14 @@ datasource db {
 }
 
 model User {
-  id         Int     @id @unique @default(autoincrement())
-  first_name String
-  last_name  String
-  email      String
-  password   String
-  Blog       Blog[]
-  Alert      Alert[]
+  id            Int     @id @unique @default(autoincrement())
+  first_name    String
+  last_name     String
+  email         String
+  password      String
+  Blog          Blog[]
+  Alert         Alert[] @relation("Sender")
+  ReceivedAlert Alert[] @relation("Receiver")
 }
 
 model Blog {
@@ -32,12 +33,15 @@ model Blog {
 }
 
 model Alert {
-  id         Int      @id @unique @default(autoincrement())
-  created_at DateTime @default(now())
-  message    String
-  isViewed   Boolean  @default(false)
-  sender_id  Int
-  blog_id    Int
-  User       User     @relation(fields: [sender_id], references: [id], onDelete: Cascade)
-  Blog       Blog     @relation(fields: [blog_id], references: [id], onDelete: Cascade)
+  id          Int      @id @unique @default(autoincrement())
+  created_at  DateTime @default(now())
+  message     String
+  isViewed    Boolean  @default(false)
+  sender_id   Int
+  blog_id     Int
+  receiver_id Int      @default(0)
+
+  User     User @relation("Sender", fields: [sender_id], references: [id], onDelete: Cascade)
+  Blog     Blog @relation(fields: [blog_id], references: [id], onDelete: Cascade)
+  Receiver User @relation("Receiver", fields: [receiver_id], references: [id], onDelete: Cascade)
 }

@@ -18,13 +18,21 @@ export class BlogsService {
         User: true,
       },
     });
-    await this.prisma.alert.create({
-      data: {
-        message: `${newBlog.User.first_name} posted a blog`,
-        sender_id: newBlog.user_id,
-        blog_id: newBlog.id,
-      },
-    });
+    const allUsers = await this.prisma.user.findMany();
+    for (const user of allUsers) {
+      if (user.id === newBlog.user_id) {
+        continue;
+      }
+      await this.prisma.alert.create({
+        data: {
+          message: `${newBlog.User.first_name} posted a blog`,
+          sender_id: newBlog.user_id,
+          blog_id: newBlog.id,
+          receiver_id: user.id,
+        },
+      });
+    }
+
     return newBlog;
   }
 

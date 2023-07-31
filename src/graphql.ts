@@ -59,10 +59,11 @@ export class Alert {
     sender_id: number;
     blog_id: number;
     isViewed: boolean;
+    receiver_id: number;
 }
 
 export abstract class IQuery {
-    abstract alerts(): Nullable<Alert>[] | Promise<Nullable<Alert>[]>;
+    abstract alerts(userId: number): Nullable<Alert>[] | Promise<Nullable<Alert>[]>;
 
     abstract alert(id: number): Nullable<Alert> | Promise<Nullable<Alert>>;
 

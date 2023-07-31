@@ -11,10 +11,11 @@ export class AlertService {
     });
   }
 
-  async findAll() {
+  async findAll(userId: number) {
     return await this.prisma.alert.findMany({
       where: {
         isViewed: false,
+        receiver_id: userId,
       },
       select: {
         id: true,

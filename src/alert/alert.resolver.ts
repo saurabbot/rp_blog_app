@@ -10,8 +10,8 @@ export class AlertResolver {
     return this.alertService.create(createAlertInput);
   }
   @Query('alerts')
-  findAll() {
-    return this.alertService.findAll();
+  findAll(@Args('userId') userId: number) {
+    return this.alertService.findAll(userId);
   }
 
   @Mutation('updateAlert')

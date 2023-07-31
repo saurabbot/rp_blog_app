@@ -23,7 +23,6 @@ export class WebsocketsGateway
     console.log(`Client disconnected: ${client.id}`);
   }
 
-  // Method to send real-time updates to clients
   sendRealTimeUpdate(blogData: any) {
     console.log('Emiting blog', blogData);
     this.server.emit('blogCreated', blogData);

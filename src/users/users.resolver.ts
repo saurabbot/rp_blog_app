@@ -15,7 +15,7 @@ export class UsersResolver {
   }
 
   @Query('users')
-  // @UseGuards(JwtAuthGaurd)
+  @UseGuards(JwtAuthGaurd)
   findAll() {
     return this.usersService.findAll();
   }

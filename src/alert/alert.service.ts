@@ -13,12 +13,26 @@ export class AlertService {
 
   async findAll() {
     return await this.prisma.alert.findMany({
+      where: {
+        isViewed: false,
+      },
       select: {
         id: true,
         created_at: true,
         message: true,
         sender_id: true,
         blog_id: true,
+        isViewed: true,
+      },
+    });
+  }
+
+  async update(id: number) {
+    return await this.prisma.alert.update({
+      where: {
+        id: id,
+      },
+      data: {
         isViewed: true,
       },
     });

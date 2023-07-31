@@ -15,6 +15,10 @@ export class CreateAlertInput {
     isViewed: boolean;
 }
 
+export class UpdateAlertInput {
+    id: number;
+}
+
 export class LoginUserInput {
     email: string;
     password: string;
@@ -73,6 +77,8 @@ export abstract class IQuery {
 
 export abstract class IMutation {
     abstract createAlert(createAlertInput: CreateAlertInput): Alert | Promise<Alert>;
+
+    abstract updateAlert(updateAlertInput: UpdateAlertInput): Alert | Promise<Alert>;
 
     abstract login(loginUserInput: LoginUserInput): LoginResponse | Promise<LoginResponse>;
 

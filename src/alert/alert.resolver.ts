@@ -13,4 +13,9 @@ export class AlertResolver {
   findAll() {
     return this.alertService.findAll();
   }
+
+  @Mutation('updateAlert')
+  async update(@Args('updateAlertInput') updateAlertInput: { id: number }) {
+    return await this.alertService.update(updateAlertInput.id);
+  }
 }

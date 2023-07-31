@@ -1,6 +1,7 @@
 import { Resolver, Query, Mutation, Args, Subscription } from '@nestjs/graphql';
 import { BlogsService } from './blogs.service';
-import { CreateBlogInput } from './dto/create-blog.input';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGaurd } from 'src/auth/jwt-aut.gaurd';
 import { Prisma } from '@prisma/client';
 import { PubSub } from 'graphql-subscriptions';
 import { UpdateBlogInput } from './dto/update-blog.input';
@@ -25,6 +26,7 @@ export class BlogsResolver {
   }
 
   @Query('blogs')
+  // @UseGuards(JwtAuthGaurd)
   findAll() {
     return this.blogsService.findAll();
   }

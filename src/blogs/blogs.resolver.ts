@@ -26,7 +26,7 @@ export class BlogsResolver {
   }
 
   @Query('blogs')
-  // @UseGuards(JwtAuthGaurd)
+  @UseGuards(JwtAuthGaurd)
   findAll() {
     return this.blogsService.findAll();
   }
